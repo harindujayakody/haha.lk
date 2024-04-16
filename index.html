@@ -477,7 +477,12 @@
                         <!-- Single Item -->
                         <div class="swiper-slide">
                             <div class="gallery-style-one">
-                                <img src="assets/img/projects/5.jpg" alt="Image not Found">
+                                <picture>
+                                    <!-- WebP format -->
+                                    <source srcset="assets/img/projects/5.webp" type="image/webp">
+                                    <!-- JPEG format fallback -->
+                                    <img src="assets/img/projects/5.jpg" alt="Plants buy Online in Sri Lanka">
+                                  </picture>                                  
                                 <div class="overlay">
                                     <p>Plants</p>
                                     <h4><a href="project-details.html">Plants Online Store</a></h4>
