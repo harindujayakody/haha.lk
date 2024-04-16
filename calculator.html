@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chick Feed Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .hero-section {
+            background-color: #1f4e3d;
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .btn-apple {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <h1 class="mb-4">Chick Feed Calculator</h1>
+        <p class="lead mb-4">Calculate the feed needed for your chicks with ease.</p>
+    </div>
+    <div class="container">
+        <div class="form-group mt-4">
+            <label for="chickAmount">Enter the number of chicks:</label>
+            <input type="number" class="form-control" id="chickAmount" min="1" placeholder="Enter chick amount" onfocus="this.setAttribute('type', 'number');" onblur="this.setAttribute('type', 'text');" pattern="[0-9]*">
+        </div>
+        <button class="btn btn-apple mb-3" onclick="calculateFeed()">Calculate</button>
+        <button class="btn btn-secondary mb-3 ml-2" onclick="resetCalculator()">Reset</button>
+        <p id="result"></p>
+        <div id="breakdown"></div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function calculateFeed() {
+            var chickAmount = document.getElementById("chickAmount").value;
+            var totalFeedGrams = 0;
+            var breakdownHTML = "<h3 class='mt-4'>Feed Breakdown:</h3><ul>";
+
+            // Calculate feed for each week
+            for (var week = 1; week <= 8; week++) {
+                var feedPerWeek = 0;
+                if (week == 1) {
+                    feedPerWeek = chickAmount * 12 * 7;
+                    breakdownHTML += "<li>Week 1: " + (feedPerWeek / 1000).toFixed(2) + " kg</li>";
+                } else if (week == 2) {
+                    feedPerWeek = chickAmount * 15 * 7;
+                    breakdownHTML += "<li>Week 2: " + (feedPerWeek / 1000).toFixed(2) + " kg</li>";
+                } else if (week == 3) {
+                    feedPerWeek = chickAmount * 25 * 7;
+                    breakdownHTML += "<li>Week 3: " + (feedPerWeek / 1000).toFixed(2) + " kg</li>";
+                } else if (week == 4) {
+                    feedPerWeek = chickAmount * 30 * 7;
+                    breakdownHTML += "<li>Week 4: " + (feedPerWeek / 1000).toFixed(2) + " kg</li>";
+                } else {
+                    feedPerWeek = chickAmount * 45 * 7;
+                    breakdownHTML += "<li>Week " + week + ": " + (feedPerWeek / 1000).toFixed(2) + " kg</li>";
+                }
+                totalFeedGrams += feedPerWeek;
+            }
+
+            breakdownHTML += "</ul>";
+
+            // Convert total feed to kg
+            var totalFeedKg = totalFeedGrams / 1000;
+
+            document.getElementById("result").innerHTML = "<h3>Total feed needed: " + totalFeedKg.toFixed(2) + " kg</h3>";
+            document.getElementById("breakdown").innerHTML = breakdownHTML;
+        }
+
+        function resetCalculator() {
+            document.getElementById("chickAmount").value = "";
+            document.getElementById("result").innerHTML = "";
+            document.getElementById("breakdown").innerHTML = "";
+        }
+
+        // Trigger calculateFeed() function when Enter key is pressed
+        document.getElementById("chickAmount").addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                calculateFeed();
+            }
+        });
+    </script>
+</body>
+</html>
