@@ -1,63 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 Not Found</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #1f4e3d; /* Updated color theme */
-      color: #fff; /* Text color */
-    }
-    .container {
-      text-align: center;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-    }
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #007bff; /* Button color */
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    .button:hover {
-      background-color: #0056b3;
-    }
-    
-    /* Pure CSS animation */
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-    
-    /* Apply animation to container */
-    .container {
-      animation: fadeIn 1s ease-in-out;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>404 Not Found | Haha Organics</title>
+    <style>
+        /* Existing styles */
+*{
+    transition: all 0.6s;
+}
+
+html {
+    height: 100%;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+    color: #888;
+    margin: 0;
+}
+
+#main{
+    display: table;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+}
+
+.fof{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.fof h1{
+    font-size: 50px;
+    display: inline-block;
+    padding-right: 12px;
+    animation: type .5s alternate infinite;
+}
+
+@keyframes type{
+    from{box-shadow: inset -3px 0px 0px #888;}
+    to{box-shadow: inset -3px 0px 0px transparent;}
+}
+
+/* Additional styles for button */
+.homepage-btn {
+    font-size: 18px;
+    text-decoration: none;
+    color: #888;
+    border: 2px solid #888;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.homepage-btn:hover {
+    color: #fff;
+    background-color: #888;
+}
+
+
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>404 Not Found</h1>
-    <p>The page you are looking for could not be found.</p>
-    <a href="index.html" class="button">Go back to Homepage</a>
-  </div>
+    <div id="main">
+        <div class="fof">
+            <h1>Error 404</h1> <br>
+            <a href="/" class="homepage-btn">Back to Homepage</a>  <!-- Button added here -->
+        </div>
+    </div>    
 </body>
+
 </html>
