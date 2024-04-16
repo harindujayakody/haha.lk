@@ -599,7 +599,12 @@
                     <!-- Single Itme -->
                     <div class="col-lg-4 col-md-6 item">
                         <div class="footer-item about">
-                            <img class="logo" src="assets/img/logo-light.png" alt="Logo">
+                            <picture class="logo">
+                                <!-- WebP format -->
+                                <source srcset="assets/img/logo-light.webp" type="image/webp">
+                                <!-- PNG format fallback -->
+                                <img src="assets/img/logo-light.png" alt="Logo">
+                              </picture>                              
                             <p>
                                 Happen active county. Winding morning ambition shyness evident to poor. Because elderly new to the point to main success.
                             </p>
@@ -719,7 +724,12 @@
             <!-- End Footer Bottom -->
         </div>
         <div class="shape-right-bottom">
-            <img src="assets/img/shape/7.png" alt="Image Not Found">
+            <picture>
+                <!-- WebP format -->
+                <source srcset="assets/img/shape/7.webp" type="image/webp">
+                <!-- PNG format fallback -->
+                <img src="assets/img/shape/7.png" alt="Farm Icon Sri Lanka">
+              </picture>              
         </div>
     </footer>
     <!-- End Footer -->
