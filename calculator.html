@@ -10,16 +10,25 @@
         /* Custom styles */
         body {
             font-family: 'Poppins', sans-serif;
-        }
-        .hero-section {
             background-color: #1f4e3d;
             color: #fff;
-            padding: 100px 0;
-            text-align: center;
+            padding-top: 50px;
         }
         .container {
             max-width: 600px;
-            margin-top: 50px;
+        }
+        .hero-section {
+            text-align: center;
+        }
+        .calculator-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-group label {
+            font-weight: bold;
         }
         .btn-apple {
             background-color: #000;
@@ -29,23 +38,46 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 20px;
+        }
+        @media only screen and (max-width: 576px) {
+            .calculator-section {
+                padding: 30px 10px;
+            }
+            .btn-apple {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+        #chickStarterResult, #growerFeedResult, #totalFeedResult {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #000;
+            margin-top: 20px;
+        }
+        .btn-secondary {
+            margin-top: 20px;
+            margin-left: 10px;
         }
     </style>
 </head>
 <body>
     <div class="hero-section">
-        <h1 class="mb-4">Chick Feed Calculator</h1>
-        <p class="lead mb-4">Calculate the feed needed for your chicks with ease.</p>
+        <h1>Chick Feed Calculator</h1>
+        <p>Calculate the feed needed for your chicks with ease.</p>
     </div>
     <div class="container">
-        <div class="form-group mt-4">
-            <label for="chickAmount">Enter the number of chicks:</label>
-            <input type="number" class="form-control" id="chickAmount" min="1" placeholder="Enter chick amount" onfocus="this.setAttribute('type', 'number');" onblur="this.setAttribute('type', 'text');" pattern="[0-9]*">
+        <div class="calculator-section">
+            <div class="form-group">
+                <label for="chickAmount">Enter the number of chicks:</label>
+                <input type="number" class="form-control" id="chickAmount" min="1" placeholder="Enter chick amount" onkeydown="if(event.key === 'Enter') calculateFeed()">
+            </div>
+            <button class="btn btn-apple" onclick="calculateFeed()">Calculate</button>
+            <button class="btn btn-secondary" onclick="resetCalculator()">Reset</button>
+            <div id="chickStarterResult"></div>
+            <div id="growerFeedResult"></div>
+            <div id="totalFeedResult"></div>
         </div>
-        <button class="btn btn-apple mb-3" onclick="calculateFeed()">Calculate</button>
-        <button class="btn btn-secondary mb-3 ml-2" onclick="resetCalculator()">Reset</button>
-        <p id="result"></p>
-        <div id="breakdown"></div>
     </div>
 
     <!-- Bootstrap JS and jQuery -->
@@ -54,55 +86,52 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
+        // Function to calculate feed
         function calculateFeed() {
             var chickAmount = document.getElementById("chickAmount").value;
-            var totalFeedGrams = 0;
-            var breakdownHTML = "<h3 class='mt-4'>Feed Breakdown:</h3><ul>";
+            var chickStarterTotal = 0;
+            var growerFeedTotal = 0;
+            var totalFeedTotal = 0;
 
-            // Calculate feed for each week
-            for (var week = 1; week <= 8; week++) {
+            // Calculate total feed needed for Chick Starter up to 4th week
+            for (var week = 1; week <= 4; week++) {
                 var feedPerWeek = 0;
                 if (week == 1) {
                     feedPerWeek = chickAmount * 12 * 7;
-                    breakdownHTML += "<li>Week 1: " + (feedPerWeek / 1000).toFixed(2) + " kg</li>";
                 } else if (week == 2) {
                     feedPerWeek = chickAmount * 15 * 7;
-                    breakdownHTML += "<li>Week 2: " + (feedPerWeek / 1000).toFixed(2) + " kg</li>";
                 } else if (week == 3) {
                     feedPerWeek = chickAmount * 25 * 7;
-                    breakdownHTML += "<li>Week 3: " + (feedPerWeek / 1000).toFixed(2) + " kg</li>";
                 } else if (week == 4) {
                     feedPerWeek = chickAmount * 30 * 7;
-                    breakdownHTML += "<li>Week 4: " + (feedPerWeek / 1000).toFixed(2) + " kg</li>";
-                } else {
-                    feedPerWeek = chickAmount * 45 * 7;
-                    breakdownHTML += "<li>Week " + week + ": " + (feedPerWeek / 1000).toFixed(2) + " kg</li>";
                 }
-                totalFeedGrams += feedPerWeek;
+                chickStarterTotal += feedPerWeek;
             }
 
-            breakdownHTML += "</ul>";
+            // Calculate total feed needed for Grower Feed from 5th week onwards
+            growerFeedTotal = chickAmount * 45 * 7 * (8 - 4);
+
+            // Calculate total feed needed
+            totalFeedTotal = chickStarterTotal + growerFeedTotal;
 
             // Convert total feed to kg
-            var totalFeedKg = totalFeedGrams / 1000;
+            var chickStarterTotalKg = chickStarterTotal / 1000;
+            var growerFeedTotalKg = growerFeedTotal / 1000;
+            var totalFeedTotalKg = totalFeedTotal / 1000;
 
-            document.getElementById("result").innerHTML = "<h3>Total feed needed: " + totalFeedKg.toFixed(2) + " kg</h3>";
-            document.getElementById("breakdown").innerHTML = breakdownHTML;
+            // Display results
+            document.getElementById("chickStarterResult").innerHTML = "<p>Total Chick Starter feed needed: <span>" + chickStarterTotalKg.toFixed(2) + " kg</span></p>";
+            document.getElementById("growerFeedResult").innerHTML = "<p>Total Grower Feed needed: <span>" + growerFeedTotalKg.toFixed(2) + " kg</span></p>";
+            document.getElementById("totalFeedResult").innerHTML = "<p>Total Feed needed: <span>" + totalFeedTotalKg.toFixed(2) + " kg</span></p>";
         }
 
+        // Function to reset calculator
         function resetCalculator() {
             document.getElementById("chickAmount").value = "";
-            document.getElementById("result").innerHTML = "";
-            document.getElementById("breakdown").innerHTML = "";
+            document.getElementById("chickStarterResult").innerHTML = "";
+            document.getElementById("growerFeedResult").innerHTML = "";
+            document.getElementById("totalFeedResult").innerHTML = "";
         }
-
-        // Trigger calculateFeed() function when Enter key is pressed
-        document.getElementById("chickAmount").addEventListener("keyup", function(event) {
-            if (event.keyCode === 13) {
-                event.preventDefault();
-                calculateFeed();
-            }
-        });
     </script>
 </body>
 </html>
