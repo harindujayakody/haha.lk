@@ -70,7 +70,7 @@
         <div class="calculator-section">
             <div class="form-group">
                 <label for="chickAmount">Enter the number of chicks:</label>
-                <input type="number" class="form-control" id="chickAmount" min="1" placeholder="Enter chick amount" onkeydown="if(event.key === 'Enter') calculateFeed()">
+                <input type="number" class="form-control" id="chickAmount" min="1" placeholder="Enter chick amount" inputmode="numeric" onkeydown="if(event.key === 'Enter') calculateFeed()">
             </div>
             <button class="btn btn-apple" onclick="calculateFeed()">Calculate</button>
             <button class="btn btn-secondary" onclick="resetCalculator()">Reset</button>
