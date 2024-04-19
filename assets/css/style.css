@@ -11,8 +11,8 @@ Version: v1.3
 
 /* Varialbes */
 :root {
-	--font-default: 'Outfit', sans-serif;
-	--font-secondary: 'Jost', sans-serif;
+    --font-default: 'Jost', sans-serif;
+    --font-secondary: 'Outfit', sans-serif;
 	--fontawesome: "Font Awesome 5 Pro";
 	--black: #000000;
 	--dark: #1f4e3d;
