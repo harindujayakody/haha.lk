@@ -7,12 +7,12 @@ Version: v1.3
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800&amp;display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&amp;display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Varialbes */
 :root {
 	--font-default: 'Outfit', sans-serif;
-	--font-secondary: 'Shadows Into Light Two', cursive;
+	--font-secondary: 'Shadows Into Light Two', jost;
 	--fontawesome: "Font Awesome 5 Pro";
 	--black: #000000;
 	--dark: #1f4e3d;
